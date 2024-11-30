@@ -3,7 +3,12 @@ session_start();
 include 'db.php';
 
 // Get task ID from URL
-$task_id = $_GET['id'];
+if (!isset($_GET['id'])) {
+    echo "Task not found.";
+    exit;
+}
+
+$task_id = intval($_GET['id']);
 
 // Fetch task from database
 $sql = "SELECT * FROM microsoft_task WHERE id = ?";
